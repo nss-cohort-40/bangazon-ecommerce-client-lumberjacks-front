@@ -1,0 +1,40 @@
+small {
+    font-size: 75%;
+  }
+  
+  header {
+    background-color: black;
+    border: black solid 3px;
+  }
+  
+  .site-title {
+    color: white;
+    text-align: center;
+  }
+  
+  nav .container {
+    display: flex;
+    padding: 0;
+    margin-bottom: 0;
+  }
+  
+  nav .container li {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+    color: white;
+    box-sizing: border-box;
+    background-color: black;
+    list-style-type: none;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .nav-link:hover {
+    color: yellow;
+  }
