@@ -1,8 +1,14 @@
 import React from 'react';
 import NavBar from './nav/NavBar'
+import ApplicationViews from './ApplicationViews'
 
-function Ecommerce() {
-  return <NavBar />;
-}
+const Ecommerce = () => {
+  return (
+    <>
+      <NavBar />
+      <ApplicationViews />
+    </>
+  );
+};
 
 export default Ecommerce;
