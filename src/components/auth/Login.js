@@ -10,7 +10,7 @@ const Login = props => {
 
     // Simplistic handler for login submit
     const handleLogin = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
 
         /*
             For now, just store the username and password that
