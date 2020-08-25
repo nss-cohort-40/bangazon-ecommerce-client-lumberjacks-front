@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
 import ProductCategories from "./product/ProductCategories"
+import ProductList from './product/ProductList';
 
 const ApplicationViews = (props) => {
     return (
@@ -11,7 +12,7 @@ const ApplicationViews = (props) => {
 
             <Route
                 exact path="/" render={props => {
-                    return <Login {...props} />
+                    return <ProductList {...props} />
                 }}
             />
 
