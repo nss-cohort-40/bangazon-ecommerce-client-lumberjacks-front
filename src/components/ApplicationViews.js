@@ -3,6 +3,7 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import ProductCategories from "./product/ProductCategories"
 
 const ApplicationViews = (props) => {
     return (
@@ -23,6 +24,12 @@ const ApplicationViews = (props) => {
             <Route
                 exact path="/login" render={props => {
                     return <Login {...props} />
+                }}
+            />   
+
+            <Route
+                exact path="/product-categories" render={props => {
+                    return <ProductCategories {...props} />
                 }}
             />   
         </React.Fragment>
