@@ -23,17 +23,18 @@ const NewProduct = props => {
 
         const newProduct = {
             "title": title.current.value,
-            "customer_id": 1,
+            // "customer_id": 1,
             "price": price.current.value,
             "description": description.current.value,
             "quantity": quantity.current.value,
             "location": location.current.value,
             "image": image.current.value,
             "created_at": currentDate,
-            "product_type_id": category.current.value
+            "product_type_id": parseInt(category.current.value)
         }
 
         productCreation(newProduct)
+        props.history.push('/products')
     }
 
     return (
