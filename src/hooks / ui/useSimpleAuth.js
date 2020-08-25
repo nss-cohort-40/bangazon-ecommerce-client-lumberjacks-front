@@ -39,8 +39,10 @@ const useSimpleAuth = () => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem("bangazon_token", res.token)
                     setIsLoggedIn(true)
+                    console.log('Login successful')
+                } else {
+                    console.log('Could not login.  User not found.')
                 }
-                else(localStorage.setItem("bangazon_token", res.token))
             })
     }
 
