@@ -3,7 +3,7 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
-import NewProduct from "./products/NewProduct"
+import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
 
 
