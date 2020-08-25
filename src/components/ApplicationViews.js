@@ -25,6 +25,12 @@ const ApplicationViews = (props) => {
                     return <Login {...props} />
                 }}
             />   
+
+            <Route
+                exact path="/product-categories" render={props => {
+                    return <ProductCategories {...props} />
+                }}
+            />   
         </React.Fragment>
     )
 }
