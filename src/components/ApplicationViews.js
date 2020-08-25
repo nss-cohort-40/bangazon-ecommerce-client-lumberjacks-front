@@ -3,6 +3,7 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import ProductCategories from "./product/ProductCategories"
 
 const ApplicationViews = (props) => {
     return (
