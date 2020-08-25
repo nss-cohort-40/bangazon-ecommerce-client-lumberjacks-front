@@ -3,8 +3,10 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
+import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
 import ProductList from './product/ProductList';
+
 
 const ApplicationViews = (props) => {
     return (
@@ -26,8 +28,12 @@ const ApplicationViews = (props) => {
                 exact path="/login" render={props => {
                     return <Login {...props} />
                 }}
-            />   
-
+            />
+            <Route
+                exact path="/sell" render={props => {
+                    return <NewProduct {...props} />
+                }}
+            />  
             <Route
                 exact path="/product-categories" render={props => {
                     return <ProductCategories {...props} />
