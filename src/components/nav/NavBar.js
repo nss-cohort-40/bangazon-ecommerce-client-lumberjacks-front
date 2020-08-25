@@ -12,7 +12,7 @@ const NavBar = props => {
                 <input type="text"></input>
             </li>
             <li>
-                <span className="nav-link" to="/"> Products </span>
+                <Link className="nav-link" to="/"> Products </Link>
             </li>
             <li>
                 <Link className="nav-link" to="/product-categories"> Product Categories </Link>
