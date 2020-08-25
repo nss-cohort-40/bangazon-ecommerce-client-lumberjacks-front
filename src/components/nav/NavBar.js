@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
@@ -16,7 +15,7 @@ const NavBar = props => {
                 <span className="nav-link" to="/"> Products </span>
             </li>
             <li>
-                <span className="nav-link" to="/categories"> Product Categories </span>
+                <Link className="nav-link" to="/product-categories"> Product Categories </Link>
             </li>
             <li>
                 <span className="nav-link" to="/sell"> Sell Product </span>
@@ -28,7 +27,7 @@ const NavBar = props => {
                 <span className="nav-link" to="/profile"> Profile </span>
             </li>
             <li>
-                <span className="nav-link" to="/login">Login</span>
+                <Link className="nav-link" to="/login">Login</Link>
             </li>
         </ul>
       </nav>

@@ -40,7 +40,6 @@ const useSimpleAuth = () => {
                     localStorage.setItem("bangazon_token", res.token)
                     setIsLoggedIn(true)
                 }
-                else(localStorage.setItem("bangazon_token", res.token))
             })
     }
 
