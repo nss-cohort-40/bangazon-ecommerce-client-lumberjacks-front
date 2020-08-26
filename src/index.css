@@ -32,8 +32,20 @@ code {
   align-items: center;
 }
 
+.category-title-container {
+  padding: 0 30px;
+}
+
 .product-card {
-  margin: 10px;
+  margin: 10px 20px;
+}
+
+.product-card-content p {
+  padding: 0 10px;
+}
+
+.product-card-content h4 {
+  padding: 0 10px;
 }
 
 .product-list {
