@@ -6,13 +6,21 @@ const CategoryDeck = props => {
     const [products, setProducts] = useState([])
 
     const getProducts = () => {
-        const urls = props.category.products.splice(-3, 3)
-
-        return Promise.all(urls.map(mappedUrl => fetch(mappedUrl)))
+        const { isSingle, category } = props;
+        if (category.id && isSingle === false) {
+            const urls = category.products.splice(-3, 3)
+            return Promise.all(urls.map(mappedUrl => fetch(mappedUrl)))
             .then(responses => Promise.all(responses.map(response => response.json())))
             .then(productArr => {
                 setProducts(productArr.reverse())
             })
+        } else if (category.id && isSingle) {
+            return Promise.all(category.products.map(mappedUrl => fetch(mappedUrl)))
+            .then(responses => Promise.all(responses.map(response => response.json())))
+            .then(productArr => {
+                setProducts(productArr.reverse())
+            })
+        }
     }
 
     useEffect(() => {
