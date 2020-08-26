@@ -37,16 +37,22 @@ const ApplicationViews = (props) => {
             />  
             <Route
                 exact path="/product-categories" render={props => {
-                    return <ProductCategories {...props} />
+                    return <ProductCategories isSingle={false} {...props} />
                 }}
             />
+            
             <Route 
                 exact path="/products/:productId(\d+)" render={props => {
-                    return <ProductDetails {...props } productId={parseInt(props.match.params.productId)}/>
-                }}
-            />
+                    return <ProductDetails {...props} productId={parseInt(props.match.params.productId)}/>
+                }}/>
+
+            <Route
+                path="/producttypes/:product_type_id" render={props => {
+                    return <ProductCategories isSingle={true} {...props} />
+                }}/>
+
         </React.Fragment>
-    )
+        )
 }
 
 export default withRouter(ApplicationViews)
