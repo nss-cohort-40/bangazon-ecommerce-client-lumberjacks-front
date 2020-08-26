@@ -43,7 +43,7 @@ const ApplicationViews = (props) => {
 
             <Route
                 exact path="/profile" render={props => {
-                    return <Profile />
+                    return <Profile/>
                 }}
             />
 
