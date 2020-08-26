@@ -13,7 +13,6 @@ const ProductCategories = props => {
             const { product_type_id } = props.match.params;
             return dataManager.get('producttypes', product_type_id)
               .then((category) => {
-                  console.log(category)
                   setSingleCategory(category)
               })
               .catch((err) => console.error('There was an issue getting a single product types:', err))

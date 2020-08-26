@@ -18,7 +18,7 @@ const ProductCard = props => {
 
     useEffect(() => {
         getProductType();
-    }, {})
+    }, [])
 
     return (
         <div className='product-card'>
