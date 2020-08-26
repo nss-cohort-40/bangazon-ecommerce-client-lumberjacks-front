@@ -6,6 +6,7 @@ import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
 import ProductList from './product/ProductList';
+import ProductDetails from './product/ProductDetail'
 
 
 const ApplicationViews = (props) => {
@@ -38,7 +39,12 @@ const ApplicationViews = (props) => {
                 exact path="/product-categories" render={props => {
                     return <ProductCategories {...props} />
                 }}
-            />   
+            />
+            <Route 
+                exact path="/products/:productId(\d+)" render={props => {
+                    return <ProductDetails {...props } productId={parseInt(props.match.params.productId)}/>
+                }}
+            />
         </React.Fragment>
     )
 }

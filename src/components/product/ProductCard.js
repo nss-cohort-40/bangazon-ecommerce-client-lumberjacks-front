@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 const ProductCard = props => {
-    const link = "/" + props.product.id
+    const link = "/products/" + props.product.id
     return (
         <div className='product-card'>
             <div className='product-card-content'>
