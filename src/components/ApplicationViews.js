@@ -5,7 +5,9 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
-import ProductList from './product/ProductList';
+import Profile from "./account/Profile"
+import ProductList from './product/ProductList'
+import PayTypeForm from './account/PayTypeForm'
 
 
 const ApplicationViews = (props) => {
@@ -39,6 +41,19 @@ const ApplicationViews = (props) => {
                     return <ProductCategories isSingle={false} {...props} />
                 }}
             />
+
+            <Route
+                exact path="/profile" render={props => {
+                    return <Profile {...props}/>
+                }}
+            />
+
+            <Route
+                exact path="/add-payment" render={props => {
+                    return <PayTypeForm {...props}/>
+                }}
+            />
+
             <Route
                 path="/producttypes/:product_type_id" render={props => {
                     return <ProductCategories isSingle={true} {...props} />
