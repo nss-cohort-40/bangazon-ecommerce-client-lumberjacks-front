@@ -24,7 +24,7 @@ const NavBar = props => {
                 <Link className="nav-link" to="/products/cart"> Shopping Cart </Link>
             </li>
             <li>
-                <span className="nav-link" to="/profile"> Profile </span>
+                <Link className="nav-link" to="/profile"> Profile </Link>
             </li>
             <li>
                 <Link className="nav-link" to="/login">Login</Link>
