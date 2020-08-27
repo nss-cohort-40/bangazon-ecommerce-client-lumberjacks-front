@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ProductCard from '../product/ProductCard';
-import dataManager from '../../modules/dataManager'
+import OrderProductCard from '../order/OrderProductCard'
+import dataManager from '../../modules/dataManager';
 
 const OrderDetails = (props) => {
     const [order, setOrder] = useState([]);
@@ -9,16 +9,18 @@ const OrderDetails = (props) => {
         return dataManager.getCart('products/cart')
         .then((cart) => {
             setOrder(cart)
+            console.log(cart)
         })
         .catch((err) => console.error('There as an issue with getting all products:', err));
     }
 
     useEffect(() => {
         getCart();
+        
     }, [])
 
     const makeOrder = order.map((singleProduct) => (
-        <ProductCard key={singleProduct.id} product={singleProduct}/>
+        <OrderProductCard order={order} key={singleProduct.id} product={singleProduct}/>
     ));
 
     return(
