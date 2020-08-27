@@ -5,7 +5,6 @@ import './ProductDetail.css'
 const ProductDetail = props => {
     
     const [product, setProduct] = useState({})
-    const [userId, setUserId] = useState(0)
 
     const getProduct = () => {
         dataManager.get("products", props.productId)
@@ -20,7 +19,7 @@ const ProductDetail = props => {
         }
 
         dataManager.post("orders", itemToAdd )
-            .then(props.history.push("/products/cart"))
+            .then(() => props.history.push("/products/cart"))
     }
 
 
@@ -38,7 +37,7 @@ const ProductDetail = props => {
             </div>
             <div className="information">
                 <h1>{product.title}</h1>
-                <h3>{product.quantity} in stock</h3>
+                    <h3>{product.quantity} in stock</h3>
                 <p>{product.description}</p>
                 <button onClick={() => {addToCart()}}>Add to Cart</button> | ${product.price}
             </div>

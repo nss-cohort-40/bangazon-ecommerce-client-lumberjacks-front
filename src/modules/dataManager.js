@@ -16,8 +16,9 @@ export default {
         return fetch(`${remoteURL}/${collection}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
-
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
             },
             body: JSON.stringify(newObject)
         }).then(response => response.json())
