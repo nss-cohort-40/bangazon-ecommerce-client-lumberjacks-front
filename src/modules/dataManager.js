@@ -11,6 +11,10 @@ export default {
         return fetch(`${remoteURL}/${collection}/${id}`)
                 .then(response => response.json())
     },
+    getCart (collection) {
+        return fetch(`${remoteURL}/${collection}`)
+                .then(response => response.json())
+    },
 
     post (collection, newObject) {
         return fetch(`${remoteURL}/${collection}`, {

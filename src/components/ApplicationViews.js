@@ -6,6 +6,7 @@ import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
 import ProductList from './product/ProductList';
+import OrderDetails from "./order/OrderDetails"
 
 
 const ApplicationViews = (props) => {
@@ -44,6 +45,11 @@ const ApplicationViews = (props) => {
                     return <ProductCategories isSingle={true} {...props} />
                 }}
             />
+            <Route
+                exact path="/products/cart" render={props => {
+                    return <OrderDetails {...props} />
+                }}
+            />  
         </React.Fragment>
     )
 }
