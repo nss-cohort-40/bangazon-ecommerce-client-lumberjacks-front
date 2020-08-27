@@ -1,0 +1,12 @@
+.product-picture{
+    max-width: 500px
+}
+
+.details_page{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.information{
+    max-width: 500px
+}
