@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import OrderProductCard from '../order/OrderProductCard'
-import dataManager from '../../modules/dataManager';
+import shoppingCart from '../../hooks /shoppingCart'
 
 const OrderDetails = (props) => {
     const [order, setOrder] = useState([]);
 
     const getCart = () => {
-        return dataManager.getCart('products/cart')
+        return shoppingCart('products/cart')
         .then((cart) => {
             setOrder(cart)
-            console.log(cart)
         })
         .catch((err) => console.error('There as an issue with getting all products:', err));
     }
