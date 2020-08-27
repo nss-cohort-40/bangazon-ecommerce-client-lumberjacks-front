@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom"
-import React from "react"
+import React, { useState } from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
@@ -9,15 +9,29 @@ import OrderDetails from "./order/OrderDetails"
 import Profile from "./account/Profile"
 import ProductList from './product/ProductList'
 import PayTypeForm from './account/PayTypeForm'
+import NavBar from './nav/NavBar'
+import dataManager from '../modules/dataManager';
 
 
 const ApplicationViews = (props) => {
+    const [searchArr, setSearchArr] = useState([])
+
+    const handleProductSearch = (search) => {
+        const searchParam = search.current.value;
+        dataManager.getByProperty('products', 'title', searchParam)
+          .then((response) => {
+              setSearchArr(response);
+              props.history.push("/");
+          })
+          .catch((err) => console.error('There was an issue with searching for a product:', err));
+    }
+
     return (
         <React.Fragment>
-
+            <NavBar handleProductSearch={handleProductSearch} />
             <Route
                 exact path="/" render={props => {
-                    return <ProductList {...props} />
+                    return <ProductList searchArr={searchArr} {...props} />
                 }}
             />
 

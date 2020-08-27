@@ -1,23 +1,22 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import dataManager from '../../modules/dataManager';
 import "./NavBar.css";
 
 const NavBar = props => {
 
-    const search = useRef()
+    const { handleProductSearch } = props;
 
-    const handleProductSearch = e => {
-        e.preventDefault();
-        dataManager.getByProperty('products', 'title', )
-    }
+    const search = useRef()
 
   return (
     <header>
         <nav>
             <ul className="container">
                 <li>
-                    <form className="product-search-form" onSubmit={handleProductSearch}>
+                    <form className="product-search-form" onSubmit={(e) => {
+                        e.preventDefault()
+                        handleProductSearch(search)
+                    }}>
                         <input ref={search} className="product-search-input" type="search" placeholder="Search" aria-label="Search" />
                         <button className="search-submit-button" type="submit">Search</button>
                     </form>
@@ -32,7 +31,7 @@ const NavBar = props => {
                     <Link className="nav-link" to="/sell"> Sell Product </Link>
                 </li>
                 <li>
-                    <span className="nav-link" to="/shopping-cart"> Shopping Cart </span>
+                    <Link className="nav-link" to="/products/cart"> Shopping Cart </Link>
                 </li>
                 <li>
                     <span className="nav-link" to="/profile"> Profile </span>

@@ -16,6 +16,8 @@ const ProductList = (props) => {
     }
 
     useEffect(() => {
+        // const { searchArr } = props;
+        // console.log(searchArr);
         getProducts();
     }, [])
 
