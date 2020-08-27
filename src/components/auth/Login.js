@@ -12,10 +12,6 @@ const Login = props => {
     const handleLogin = (e) => {
         e.preventDefault()
 
-        /*
-            For now, just store the username and password that
-            the customer enters into local storage.
-        */
         const credentials = {
             "username": username.current.value,
             "password": password.current.value
@@ -52,6 +48,7 @@ const Login = props => {
                     <button type="submit">
                         Sign in
                     </button>
+                    <button onClick={() => props.history.push('/register')}></button>
                 </fieldset>
             </form>
         </main>
