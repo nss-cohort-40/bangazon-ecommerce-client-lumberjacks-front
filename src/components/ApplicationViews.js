@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom"
+import { Route, Redirect } from "react-router-dom"
 import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
@@ -12,6 +12,8 @@ import PayTypeForm from './account/PayTypeForm'
 
 
 const ApplicationViews = (props) => {
+
+
     return (
         <React.Fragment>
 
@@ -34,8 +36,11 @@ const ApplicationViews = (props) => {
             />
             <Route
                 exact path="/sell" render={props => {
+                    if (props.loggedIn) {
                     return <NewProduct {...props} />
-                }}
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />  
             <Route
                 exact path="/product-categories" render={props => {
@@ -51,8 +56,11 @@ const ApplicationViews = (props) => {
 
             <Route
                 exact path="/add-payment" render={props => {
-                    return <PayTypeForm {...props}/>
-                }}
+                    if (props.loggedIn) {
+                    return <PayTypeForm {...props} />
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />
 
             <Route
@@ -62,8 +70,11 @@ const ApplicationViews = (props) => {
             />
             <Route
                 exact path="/products/cart" render={props => {
+                    if (props.loggedIn) {
                     return <OrderDetails {...props} />
-                }}
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />  
         </React.Fragment>
     )

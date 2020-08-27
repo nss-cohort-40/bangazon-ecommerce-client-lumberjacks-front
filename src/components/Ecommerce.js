@@ -1,18 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import NavBar from './nav/NavBar'
 import ApplicationViews from './ApplicationViews'
 
 const Ecommerce = () => {
 
-  const [loggedIn, setLoggedIn] = useState(isAuthenticated())
+  const [loggedIn, setLoggedIn] = useState(false)
 
   const isAuthenticated = () =>
-      localStorage.getItem("bangazon_token") !== null
+      loggedIn || localStorage.getItem("bangazon_token") !== null
 
   return (
     <>
       <NavBar loggedIn={loggedIn}/>
-      <ApplicationViews />
+      <ApplicationViews loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
     </>
   );
 };
