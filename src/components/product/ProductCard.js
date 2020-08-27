@@ -25,6 +25,8 @@ const ProductCard = props => {
             <div className='product-card-content'>
                 <img src={product.image} width={240} alt='thumbnail' />
                 <h4>{product.title}</h4>
+                <p>${parseInt(product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}/unit</p>
+                <p>Quantity: {product.quantity}</p>
                 <p>Category: <Link to={categoryLink}>{productType.name}</Link></p>
             </div>
         </div>
