@@ -17,6 +17,7 @@ export default {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
+
             },
             body: JSON.stringify(newObject)
         }).then(response => response.json())
@@ -32,7 +33,8 @@ export default {
         return fetch(`${remoteURL}/${collection}/${editedObject.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
             },
             body: JSON.stringify(editedObject)
         }).then(response => response.json())

@@ -18,8 +18,9 @@ const ProductDetail = props => {
         const itemToAdd = {
             'product_id': product.id
         }
-        
+
         dataManager.post("orders", itemToAdd )
+            .then(props.history.push("/products/cart"))
     }
 
 
