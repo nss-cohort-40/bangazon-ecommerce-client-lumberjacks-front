@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-const Profile = () => {
+const Profile = props => {
     
     const [currentUser, setCurrentUser] = useState({})
 
@@ -13,7 +13,6 @@ const Profile = () => {
             }
         }).then(response => response.json())
         .then(user => {
-            console.log(user[0])
             const loggedInUser = {
                 "id": user[0].id,
                 "first_name": user[0].user.first_name,
@@ -38,9 +37,7 @@ const Profile = () => {
             <p>Last name: {currentUser.last_name}</p>
             <p>Address: {currentUser.address}</p>
             <p>Phone number: {currentUser.phone_number}</p>
-            <p>Payment options:</p>
-            <p>Order history:</p>
-            <button>Add payment option</button>
+            <button onClick={() => props.history.push('/add-payment')}>Add payment option</button>
         </section>
     )
 }

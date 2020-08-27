@@ -6,7 +6,8 @@ import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
 import Profile from "./account/Profile"
-import ProductList from './product/ProductList';
+import ProductList from './product/ProductList'
+import PayTypeForm from './account/PayTypeForm'
 
 
 const ApplicationViews = (props) => {
@@ -43,7 +44,13 @@ const ApplicationViews = (props) => {
 
             <Route
                 exact path="/profile" render={props => {
-                    return <Profile/>
+                    return <Profile {...props}/>
+                }}
+            />
+
+            <Route
+                exact path="/add-payment" render={props => {
+                    return <PayTypeForm {...props}/>
                 }}
             />
 
