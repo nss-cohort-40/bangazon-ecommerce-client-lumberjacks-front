@@ -38,7 +38,7 @@ const ApplicationViews = (props) => {
             />  
             <Route
                 exact path="/product-categories" render={props => {
-                    return <ProductCategories {...props} />
+                    return <ProductCategories isSingle={false} {...props} />
                 }}
             />
 
@@ -54,6 +54,11 @@ const ApplicationViews = (props) => {
                 }}
             />
 
+            <Route
+                path="/producttypes/:product_type_id" render={props => {
+                    return <ProductCategories isSingle={true} {...props} />
+                }}
+            />
         </React.Fragment>
     )
 }

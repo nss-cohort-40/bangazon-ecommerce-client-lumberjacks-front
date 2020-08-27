@@ -1,14 +1,36 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import productCreation from "../../hooks / ui/productCreation"
+import dataManager from '../../modules/dataManager';
+
+import ProductTypeDropdown from './ProductTypeDropdown';
 
 const NewProduct = props => {
+    const [productTypes, setProductTypes] = useState([])
+    const [selectedProductTypeId, setSelectedProductTypeId] = useState(0)
+
+    const getProductTypes = () => {
+        return dataManager.getAll('producttypes')
+          .then((productTypes) => {
+              setProductTypes(productTypes);
+          })
+          .catch((err) => console.error('There was an issue getting all product types:', err));
+    }
+
+    const selectedProductTypeIdChange = e => {
+        const productTypeId = e.target.value;
+        setSelectedProductTypeId(parseInt(productTypeId))
+    }
+
+    useEffect(() => {
+        getProductTypes()
+    }, [])
+
     const title = useRef()
     const description = useRef()
     const price = useRef()
     const quantity = useRef()
     const location = useRef()
     const image = useRef()
-    const category = useRef()
 
     const handleNewProduct = e => {
         e.preventDefault()
@@ -20,21 +42,23 @@ const NewProduct = props => {
 
         const currentDate = dateYear + "-" + dateMonth + "-" + dateDay
 
-
         const newProduct = {
             "title": title.current.value,
-            // "customer_id": 1,
             "price": price.current.value,
             "description": description.current.value,
             "quantity": quantity.current.value,
             "location": location.current.value,
             "image": image.current.value,
             "created_at": currentDate,
-            "product_type_id": parseInt(category.current.value)
+            "product_type_id": selectedProductTypeId
         }
 
         productCreation(newProduct)
-        props.history.push('/products')
+          .then((response) => {
+            console.log(response);
+            props.history.push('/')
+          })
+          .catch((err) => console.error('There was an issue with adding a new product:', err));
     }
 
     return (
@@ -106,20 +130,15 @@ const NewProduct = props => {
 
                     <fieldset>
                         <label htmlFor="category"> Product Category </label>
-                        <select ref={category} type="dropdown"
-                            name="description"
-                            className="form-control"
-                            required>
-                                <option value="1">Guns</option>
-                                <option value="2">Electronics</option>
-                                <option value="3">Housewares</option>
-                                <option value="4">Toys</option>
-                                <option value="5">Tools</option>
-                            </select>
+                        <ProductTypeDropdown 
+                            productTypes={productTypes}
+                            selectedProductTypeIdChange={selectedProductTypeIdChange}
+                            selectedProductTypeId={selectedProductTypeId}
+                        />
                     </fieldset>
 
                     <fieldset>
-                        <button type="submit">
+                        <button type="submit" disabled={selectedProductTypeId === 0}>
                             Sell Product
                         </button>
                     </fieldset>
