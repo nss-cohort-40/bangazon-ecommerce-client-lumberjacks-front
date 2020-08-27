@@ -1,23 +1,27 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import dataManager from '../../modules/dataManager';
 import "./NavBar.css";
 
 const NavBar = props => {
 
     const search = useRef()
 
-    const handleProductSearch = () => {
-        console.log(search.current.value);
+    const handleProductSearch = e => {
+        e.preventDefault();
+        dataManager.getByProperty('products', 'title', )
     }
 
   return (
     <header>
         <nav>
-            <form className="product-search-form" onSubmit={handleProductSearch}>
-                <input ref={search} className="product-search-input" type="search" placeholder="Search" aria-label="Search" />
-                <button className="search-submit-button" type="submit">Search</button>
-            </form>
             <ul className="container">
+                <li>
+                    <form className="product-search-form" onSubmit={handleProductSearch}>
+                        <input ref={search} className="product-search-input" type="search" placeholder="Search" aria-label="Search" />
+                        <button className="search-submit-button" type="submit">Search</button>
+                    </form>
+                </li>
                 <li>
                     <Link className="nav-link" to="/"> Products </Link>
                 </li>
