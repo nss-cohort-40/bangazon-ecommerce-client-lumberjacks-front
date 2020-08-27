@@ -30,6 +30,8 @@ const ProductCard = props => {
                         {props.product.title}
                     </Link>
                 </h4>
+                <p>${parseInt(product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}/unit</p>
+                <p>Quantity: {product.quantity}</p>
                 <p>Category: <Link to={categoryLink}>{productType.name}</Link></p>
             </div>
         </div>
