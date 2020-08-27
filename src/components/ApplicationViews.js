@@ -5,6 +5,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
+import ProductDetails from './product/ProductDetail'
 import OrderDetails from "./order/OrderDetails"
 import Profile from "./account/Profile"
 import ProductList from './product/ProductList'
@@ -42,6 +43,11 @@ const ApplicationViews = (props) => {
                     return <ProductCategories isSingle={false} {...props} />
                 }}
             />
+            
+            <Route 
+                exact path="/products/:productId(\d+)" render={props => {
+                    return <ProductDetails {...props} productId={parseInt(props.match.params.productId)}/>
+                }}/>
 
             <Route
                 exact path="/profile" render={props => {
@@ -58,15 +64,15 @@ const ApplicationViews = (props) => {
             <Route
                 path="/producttypes/:product_type_id" render={props => {
                     return <ProductCategories isSingle={true} {...props} />
-                }}
-            />
+                }}/>
+                
             <Route
                 exact path="/products/cart" render={props => {
                     return <OrderDetails {...props} />
                 }}
             />  
         </React.Fragment>
-    )
+        )
 }
 
 export default withRouter(ApplicationViews)
