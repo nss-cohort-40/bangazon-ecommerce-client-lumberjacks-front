@@ -7,6 +7,10 @@ import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
 import ProductList from './product/ProductList';
 import ProductDetails from './product/ProductDetail'
+import OrderDetails from "./order/OrderDetails"
+import Profile from "./account/Profile"
+import ProductList from './product/ProductList'
+import PayTypeForm from './account/PayTypeForm'
 
 
 const ApplicationViews = (props) => {
@@ -47,10 +51,27 @@ const ApplicationViews = (props) => {
                 }}/>
 
             <Route
+                exact path="/profile" render={props => {
+                    return <Profile {...props}/>
+                }}
+            />
+
+            <Route
+                exact path="/add-payment" render={props => {
+                    return <PayTypeForm {...props}/>
+                }}
+            />
+
+            <Route
                 path="/producttypes/:product_type_id" render={props => {
                     return <ProductCategories isSingle={true} {...props} />
                 }}/>
-
+                
+            <Route
+                exact path="/products/cart" render={props => {
+                    return <OrderDetails {...props} />
+                }}
+            />  
         </React.Fragment>
         )
 }
