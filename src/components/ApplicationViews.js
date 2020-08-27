@@ -5,6 +5,7 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
+import OrderDetails from "./order/OrderDetails"
 import Profile from "./account/Profile"
 import ProductList from './product/ProductList'
 import PayTypeForm from './account/PayTypeForm'
@@ -59,6 +60,11 @@ const ApplicationViews = (props) => {
                     return <ProductCategories isSingle={true} {...props} />
                 }}
             />
+            <Route
+                exact path="/products/cart" render={props => {
+                    return <OrderDetails {...props} />
+                }}
+            />  
         </React.Fragment>
     )
 }
