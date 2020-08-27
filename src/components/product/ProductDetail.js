@@ -13,9 +13,13 @@ const ProductDetail = props => {
             setProduct(response)
         })
     }
-    
-    const getUserId = () => {
+
+    const addToCart = () => {
+        const itemToAdd = {
+            'product_id': product.id
+        }
         
+        dataManager.post("orders", itemToAdd )
     }
 
 
@@ -35,7 +39,7 @@ const ProductDetail = props => {
                 <h1>{product.title}</h1>
                 <h3>{product.quantity} in stock</h3>
                 <p>{product.description}</p>
-                <button >Add to Cart</button> | ${product.price}
+                <button onClick={() => {addToCart()}}>Add to Cart</button> | ${product.price}
             </div>
         </div>
         </>

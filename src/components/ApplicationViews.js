@@ -5,7 +5,6 @@ import Register from "./auth/Register"
 import Login from "./auth/Login"
 import NewProduct from "./product/NewProduct"
 import ProductCategories from "./product/ProductCategories"
-import ProductList from './product/ProductList';
 import ProductDetails from './product/ProductDetail'
 import OrderDetails from "./order/OrderDetails"
 import Profile from "./account/Profile"
