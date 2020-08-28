@@ -14,7 +14,7 @@ const NavBar = props => {
             <ul className="container">
             {isAuthenticated()
             ? <li>
-                <input type="text"></input>
+                <NavBarSearchForm />
             </li>
             : null}
             <li>

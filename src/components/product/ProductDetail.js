@@ -25,9 +25,6 @@ const ProductDetail = props => {
             .then(() => props.history.push("/products/cart"))
     }
 
-
-
-
     useEffect(() => {
         getProduct()
     },[])
