@@ -4,20 +4,32 @@ import dataManager from '../../modules/dataManager'
 
 
 
-const ProductList = (props) => {
+const ProductList = ({ history, location }) => {
     const [products, setProducts] = useState([]);
 
-    const getProducts = () => {
-        return dataManager.getAll('products')
-          .then((products) => {
-              setProducts(products)
-          })
-          .catch((err) => console.error('There as an issue with getting all products:', err));
-    }
-
     useEffect(() => {
+        const getProducts = () => {
+            if (location.search) {
+                return dataManager.getAll(`products${location.search}`)
+                  .then((products) => {
+                      if (products.length > 0) {
+                        setProducts(products);
+                      } else {
+                          alert('No results');
+                          history.push('/');
+                      }
+                  })
+                  .catch((err) => console.error('There was an issue with getting products:', err));
+            } else {
+                return dataManager.getAll('products')
+                .then((products) => {
+                    setProducts(products)
+                })
+                .catch((err) => console.error('There was an issue with getting all products:', err));
+            }
+        }
         getProducts();
-    }, [])
+    }, [location.search, history]);
 
     const makeProducts = products.map((singleProduct) => (
         <ProductCard key={singleProduct.id} product={singleProduct} />

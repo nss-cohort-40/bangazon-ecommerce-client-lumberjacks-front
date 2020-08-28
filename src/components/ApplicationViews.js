@@ -10,14 +10,32 @@ import OrderDetails from "./order/OrderDetails"
 import Profile from "./account/Profile"
 import ProductList from './product/ProductList'
 import PayTypeForm from './account/PayTypeForm'
+import NavBar from './nav/NavBar'
+import dataManager from '../modules/dataManager';
 
 
-const ApplicationViews = (props) => {
+const ApplicationViews = () => {
+
+    const handleProductSearch = (search) => {
+        const searchParam = search.current.value;
+        dataManager.getByProperty('products', 'title', searchParam)
+          .then((response) => {
+              console.log(response);
+          })
+          .catch((err) => console.error('There was an issue with searching for a product:', err));
+    }
+
     return (
         <React.Fragment>
-
+            <NavBar handleProductSearch={handleProductSearch} />
             <Route
                 exact path="/" render={props => {
+                    return <ProductList {...props} />
+                }}
+            />
+
+            <Route
+                exact path="/products" render={props => {
                     return <ProductList {...props} />
                 }}
             />
