@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom"
-import React, { useState } from "react"
+import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
 import Login from "./auth/Login"
@@ -14,15 +14,13 @@ import NavBar from './nav/NavBar'
 import dataManager from '../modules/dataManager';
 
 
-const ApplicationViews = (props) => {
-    const [searchArr, setSearchArr] = useState([])
+const ApplicationViews = () => {
 
     const handleProductSearch = (search) => {
         const searchParam = search.current.value;
         dataManager.getByProperty('products', 'title', searchParam)
           .then((response) => {
-              setSearchArr(response);
-              props.history.push("/");
+              console.log(response);
           })
           .catch((err) => console.error('There was an issue with searching for a product:', err));
     }
@@ -32,7 +30,13 @@ const ApplicationViews = (props) => {
             <NavBar handleProductSearch={handleProductSearch} />
             <Route
                 exact path="/" render={props => {
-                    return <ProductList searchArr={searchArr} {...props} />
+                    return <ProductList {...props} />
+                }}
+            />
+
+            <Route
+                exact path="/products" render={props => {
+                    return <ProductList {...props} />
                 }}
             />
 

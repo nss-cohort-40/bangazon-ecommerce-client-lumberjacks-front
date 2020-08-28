@@ -1,25 +1,16 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import NavBarSearchForm from './NavBarSearchForm';
 
-const NavBar = props => {
-
-    const { handleProductSearch } = props;
-
-    const search = useRef()
+const NavBar = () => {
 
   return (
     <header>
         <nav>
             <ul className="container">
                 <li>
-                    <form className="product-search-form" onSubmit={(e) => {
-                        e.preventDefault()
-                        handleProductSearch(search)
-                    }}>
-                        <input ref={search} className="product-search-input" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="search-submit-button" type="submit">Search</button>
-                    </form>
+                    <NavBarSearchForm />
                 </li>
                 <li>
                     <Link className="nav-link" to="/"> Products </Link>
