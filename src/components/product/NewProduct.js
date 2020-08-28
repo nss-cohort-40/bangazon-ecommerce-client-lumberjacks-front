@@ -55,7 +55,6 @@ const NewProduct = props => {
 
         productCreation(newProduct)
           .then((response) => {
-            console.log(response);
             props.history.push('/')
           })
           .catch((err) => console.error('There was an issue with adding a new product:', err));
