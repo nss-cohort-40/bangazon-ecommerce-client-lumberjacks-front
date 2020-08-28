@@ -30,7 +30,7 @@ const ApplicationViews = props => {
 
     return (
         <React.Fragment>
-            <NavBar handleProductSearch={handleProductSearch} />
+            <NavBar handleProductSearch={handleProductSearch} {...props} />
             <Route
                 exact path="/" render={props => {
                     return <ProductList {...props} />

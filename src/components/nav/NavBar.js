@@ -4,7 +4,7 @@ import "./NavBar.css";
 import NavBarSearchForm from './NavBarSearchForm';
 import useSimpleAuth from "../../hooks / ui/useSimpleAuth"
 
-const NavBar = () => {
+const NavBar = props => {
 
     const { isAuthenticated, logout } = useSimpleAuth()
 
@@ -40,7 +40,10 @@ const NavBar = () => {
             : null}
             {isAuthenticated()
             ? <li>
-                <span className="nav-link" onClick={logout}>Logout</span>
+                <span className="nav-link" onClick={() => {
+                    logout()
+                    props.history.push('/')
+                }}>Logout</span>
             </li>
             : <li>
                 <Link className="nav-link" to="/login">Login</Link>
