@@ -2,19 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import NavBarSearchForm from './NavBarSearchForm';
+import useSimpleAuth from "../../hooks / ui/useSimpleAuth"
 
 const NavBar = props => {
 
-    const logout = () => {
-        localStorage.clear()
-        props.setLoggedIn(false)
-      }
+    const { isAuthenticated, logout } = useSimpleAuth()
 
   return (
     <header>
         <nav>
             <ul className="container">
-            {props.loggedIn
+            {isAuthenticated()
             ? <li>
                 <input type="text"></input>
             </li>
@@ -25,25 +23,27 @@ const NavBar = props => {
             <li>
                 <Link className="nav-link" to="/product-categories"> Product Categories </Link>
             </li>
-            {props.loggedIn
+            {isAuthenticated()
             ? <li>
                 <Link className="nav-link" to="/sell"> Sell Product </Link>
             </li>
             : null}
-            {props.loggedIn
+            {isAuthenticated()
             ? <li>
                 <Link className="nav-link" to="/products/cart"> Shopping Cart </Link>
             </li>
             : null}
-            <li>
+            {isAuthenticated()
+            ? <li>
                 <Link className="nav-link" to="/profile"> Profile </Link>
             </li>
-            {props.loggedIn
+            : null}
+            {isAuthenticated()
             ? <li>
-                <Link className="nav-link" to="/login">Login</Link>
+                <Link className="nav-link" onClick={logout}>Logout</Link>
             </li>
             : <li>
-                <Link className="nav-link" onClick={logout}>Logout</Link>
+                <Link className="nav-link" to="/login">Login</Link>
             </li>}
         </ul>
       </nav>

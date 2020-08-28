@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import dataManager from '../../modules/dataManager'
 import './ProductDetail.css'
+import useSimpleAuth from "../../hooks / ui/useSimpleAuth"
 
 const ProductDetail = props => {
+
+    const { isAuthenticated, logout } = useSimpleAuth()
     
     const [product, setProduct] = useState({})
 
@@ -31,17 +34,20 @@ const ProductDetail = props => {
 
     return(
         <>
-        <div className="details_page">
-            <div className="picture">
-                <img className="product-picture"  src={product.image}/>
+            <div className="details_page">
+                <div className="picture">
+                    <img className="product-picture"  src={product.image}/>
+                </div>
+                <div className="information">
+                    <h1>{product.title}</h1>
+                        <h3>{product.quantity} in stock</h3>
+                    <p>{product.description}</p>
+                    {isAuthenticated()
+                    ? <button onClick={() => {addToCart()}}>Add to Cart</button>
+                    : null}
+                    <p>${product.price}</p>
+                </div>
             </div>
-            <div className="information">
-                <h1>{product.title}</h1>
-                    <h3>{product.quantity} in stock</h3>
-                <p>{product.description}</p>
-                <button onClick={() => {addToCart()}}>Add to Cart</button> | ${product.price}
-            </div>
-        </div>
         </>
     )
 }
