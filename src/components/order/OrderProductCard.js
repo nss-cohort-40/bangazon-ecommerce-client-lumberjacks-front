@@ -22,14 +22,21 @@ const OrderProductCard = props => {
     const getOrder = () => {
         return shoppingCart.currentOrder()
         .then((order) => {
+            console.log(order)
             setOrder(order)
         })
         .catch((err) => console.error('There as an issue with getting all products:', err));
     }
+    const getOrderProducts = () => {
+        return shoppingCart.getOrderProduct()
+        .then((allOrderProducts) => {
+            console.log(allOrderProducts)
+        })
+    }
 
     const handleDelete = () => {
         const orderID = order[0].id
-        console.log(order)
+        // console.log(order)
         shoppingCart.getOrderProduct(orderID)
         .then((currentOrderProduct) => {
             currentOrderProduct.map(singleorder=>{
@@ -53,6 +60,7 @@ const OrderProductCard = props => {
     useEffect(() => {
         getProductType();
         getOrder();
+        getOrderProducts();
     }, [])
 
     return (
