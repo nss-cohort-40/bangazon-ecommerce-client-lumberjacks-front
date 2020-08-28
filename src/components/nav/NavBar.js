@@ -2,36 +2,51 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import NavBarSearchForm from './NavBarSearchForm';
+import useSimpleAuth from "../../hooks / ui/useSimpleAuth"
 
-const NavBar = () => {
+const NavBar = props => {
+
+    const { isAuthenticated, logout } = useSimpleAuth()
 
   return (
     <header>
         <nav>
             <ul className="container">
-                <li>
-                    <NavBarSearchForm />
-                </li>
-                <li>
-                    <Link className="nav-link" to="/"> Products </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/product-categories"> Product Categories </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/sell"> Sell Product </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/products/cart"> Shopping Cart </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/profile"> Profile </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/login">Login</Link>
-                </li>
-            </ul>
-        </nav>
+            {isAuthenticated()
+            ? <li>
+                <NavBarSearchForm />
+            </li>
+            : null}
+            <li>
+                <Link className="nav-link" to="/"> Products </Link>
+            </li>
+            <li>
+                <Link className="nav-link" to="/product-categories"> Product Categories </Link>
+            </li>
+            {isAuthenticated()
+            ? <li>
+                <Link className="nav-link" to="/sell"> Sell Product </Link>
+            </li>
+            : null}
+            {isAuthenticated()
+            ? <li>
+                <Link className="nav-link" to="/products/cart"> Shopping Cart </Link>
+            </li>
+            : null}
+            {isAuthenticated()
+            ? <li>
+                <Link className="nav-link" to="/profile"> Profile </Link>
+            </li>
+            : null}
+            {isAuthenticated()
+            ? <li>
+                <Link className="nav-link" onClick={logout}>Logout</Link>
+            </li>
+            : <li>
+                <Link className="nav-link" to="/login">Login</Link>
+            </li>}
+        </ul>
+      </nav>
     </header>
   );
 };
