@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom"
+import { Route, Redirect } from "react-router-dom"
 import React from "react"
 import { withRouter } from "react-router-dom"
 import Register from "./auth/Register"
@@ -12,9 +12,12 @@ import ProductList from './product/ProductList'
 import PayTypeForm from './account/PayTypeForm'
 import NavBar from './nav/NavBar'
 import dataManager from '../modules/dataManager';
+import useSimpleAuth from "../hooks / ui/useSimpleAuth"
 
 
-const ApplicationViews = () => {
+const ApplicationViews = props => {
+
+    const { isAuthenticated, logout } = useSimpleAuth()
 
     const handleProductSearch = (search) => {
         const searchParam = search.current.value;
@@ -27,7 +30,7 @@ const ApplicationViews = () => {
 
     return (
         <React.Fragment>
-            <NavBar handleProductSearch={handleProductSearch} />
+            <NavBar handleProductSearch={handleProductSearch} loggedIn={props.loggedIn} logout={props.logout}/>
             <Route
                 exact path="/" render={props => {
                     return <ProductList {...props} />
@@ -53,8 +56,11 @@ const ApplicationViews = () => {
             />
             <Route
                 exact path="/sell" render={props => {
+                    if (isAuthenticated()) {
                     return <NewProduct {...props} />
-                }}
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />  
             <Route
                 exact path="/product-categories" render={props => {
@@ -69,14 +75,20 @@ const ApplicationViews = () => {
 
             <Route
                 exact path="/profile" render={props => {
+                    if (isAuthenticated()) {
                     return <Profile {...props}/>
-                }}
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />
 
             <Route
                 exact path="/add-payment" render={props => {
-                    return <PayTypeForm {...props}/>
-                }}
+                    if (isAuthenticated()) {
+                    return <PayTypeForm {...props} />
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />
 
             <Route
@@ -86,8 +98,11 @@ const ApplicationViews = () => {
                 
             <Route
                 exact path="/products/cart" render={props => {
+                    if (isAuthenticated()) {
                     return <OrderDetails {...props} />
-                }}
+                } else {
+                    return <Redirect to='login' />
+                }}}
             />  
         </React.Fragment>
         )
