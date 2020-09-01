@@ -40,6 +40,11 @@ const NavBar = props => {
             : null}
             {isAuthenticated()
             ? <li>
+                <Link className="nav-link" to="/products/myproducts"> My Products </Link>
+            </li>
+            : null}
+            {isAuthenticated()
+            ? <li>
                 <span className="nav-link" onClick={() => {
                     logout()
                     props.history.push('/')
