@@ -26,7 +26,23 @@ export default {
 
     delete (collection, id) {
         return fetch(`${remoteURL}/${collection}/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+            }
+        })
+    },
+    deleteProductOrder (collection, id) {
+        return fetch(`${remoteURL}/${collection}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+            },
+            body: JSON.stringify({product_id: id})
         })
     },
     

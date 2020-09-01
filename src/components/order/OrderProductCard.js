@@ -8,25 +8,30 @@ const OrderProductCard = props => {
     const [isLoading, setIsLoading] = useState(false)
     const { product } = props;
     const categoryLink = `/producttypes/${product.product_type_id}`
-
+    
     const getProductType = () => {
+        setIsLoading(true)
         return dataManager.get('producttypes', product.product_type_id)
           .then((productType) => {
               setProductType(productType);
+              setIsLoading(false)
           })
           .catch((err) => console.error('There was an issue getting a product type:', err));
     }
-
-    const handleDelete = () => {
+    
+    const handleDelete = (id) => {
         setIsLoading(true)
-        dataManager.delete('orderproducts', props.order.id)
+        dataManager.deleteProductOrder('products/cart', id)
+        .then(() => props.setToggle(!props.toggle)
+        )
         setIsLoading(false)
-        getProductType()
+
     }
 
     useEffect(() => {
         getProductType();
-    }, [])
+        
+    }, []);
 
     return (
         <div className='product-card'>
@@ -35,7 +40,7 @@ const OrderProductCard = props => {
                 <h4>{product.title}</h4>
                 <p>${parseInt(product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}/unit</p>
                 <p>Category: <Link to={categoryLink}>{productType.name}</Link></p>
-                <button className="delete-product-order" onClick = {handleDelete} disabled={isLoading}>Delete</button>
+                <button className="delete-product-order" onClick = {()=>handleDelete(product.id)} disabled={isLoading}>Delete</button>
             </div>
         </div>
     )
