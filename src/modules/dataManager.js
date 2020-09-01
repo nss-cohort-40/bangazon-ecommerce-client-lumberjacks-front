@@ -34,6 +34,17 @@ export default {
             }
         })
     },
+    deleteProductOrder (collection, id) {
+        return fetch(`${remoteURL}/${collection}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+            },
+            body: JSON.stringify({product_id: id})
+        })
+    },
     
     update (collection, editedObject) {
         return fetch(`${remoteURL}/${collection}/${editedObject.id}`, {

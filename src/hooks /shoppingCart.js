@@ -9,8 +9,8 @@ shoppingCart() {
         }
     }).then(response => response.json())
 },
-getOrderProduct(order_id) {
-    return fetch(`http://127.0.0.1:8000/orderproducts?order_id=${order_id}`, {
+getOrderProduct() {
+    return fetch('http://127.0.0.1:8000/orderproducts', {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
