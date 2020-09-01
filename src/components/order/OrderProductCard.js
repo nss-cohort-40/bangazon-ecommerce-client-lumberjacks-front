@@ -2,7 +2,6 @@ import React from 'react'
 import dataManager from '../../modules/dataManager'
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import shoppingCart from "../../hooks /shoppingCart"
 
 const OrderProductCard = props => {
     const [productType, setProductType] = useState({})
@@ -10,7 +9,6 @@ const OrderProductCard = props => {
     const { product } = props;
     const categoryLink = `/producttypes/${product.product_type_id}`
     
-    console.log(product)
     const getProductType = () => {
         setIsLoading(true)
         return dataManager.get('producttypes', product.product_type_id)
@@ -24,14 +22,16 @@ const OrderProductCard = props => {
     const handleDelete = (id) => {
         setIsLoading(true)
         dataManager.deleteProductOrder('products/cart', id)
+        .then(() => props.setToggle(!props.toggle)
+        )
         setIsLoading(false)
-        props.setToggle(!props.toggle)
+
     }
 
     useEffect(() => {
         getProductType();
         
-    },[productType.name]);
+    }, []);
 
     return (
         <div className='product-card'>

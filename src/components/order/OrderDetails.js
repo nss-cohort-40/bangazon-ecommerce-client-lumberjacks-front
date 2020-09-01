@@ -25,7 +25,7 @@ const OrderDetails = (props) => {
         <div className="OrderDetail">
             <h1>Shopping Cart</h1>
             <div className="product-container">
-            {cart.map((singleProduct) => <OrderProductCard setToggle={setToggle} toggle={toggle} key={singleProduct.id} product={singleProduct}/>)}
+            {cart.map((singleProduct, i) => <OrderProductCard setToggle={setToggle} toggle={toggle} key={i+1} product={singleProduct}/>)}
             </div>
         </div>
     )
