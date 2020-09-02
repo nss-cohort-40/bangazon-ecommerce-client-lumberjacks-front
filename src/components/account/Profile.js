@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 const Profile = props => {
     
     const [currentUser, setCurrentUser] = useState({})
+    const [paymentTypes, setPaymentTypes] = useState([])
 
     const getCurrentUser = () => {
         return fetch('http://localhost:8000/customers', {
@@ -25,8 +26,23 @@ const Profile = props => {
         })
     }
 
+    const getPaymentTypes = () => {
+        return fetch('http://localhost:8000/paymenttypes', {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('bangazon_token')}`
+            }
+        }).then(response => response.json())
+        .then(payTypeArr => setPaymentTypes(payTypeArr))
+    }
+
     useEffect(() => {
         getCurrentUser();
+    }, [])
+
+    useEffect(() => {
+        getPaymentTypes();
     }, [])
 
     return (
@@ -37,7 +53,16 @@ const Profile = props => {
             <p>Last name: {currentUser.last_name}</p>
             <p>Address: {currentUser.address}</p>
             <p>Phone number: {currentUser.phone_number}</p>
+
+            <h3>Payment Types:</h3>
+            <ul>
+                {paymentTypes.map(mappedPayType => {
+                    return <li key={mappedPayType.id}>{mappedPayType.merchant_name} {mappedPayType.expiration_date}</li>
+                })}
+            </ul>
+
             <button onClick={() => props.history.push('/add-payment')}>Add payment option</button>
+            <button>Edit account</button>
         </section>
     )
 }

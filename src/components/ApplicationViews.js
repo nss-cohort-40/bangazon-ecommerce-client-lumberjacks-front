@@ -17,7 +17,7 @@ import useSimpleAuth from "../hooks / ui/useSimpleAuth"
 
 const ApplicationViews = props => {
 
-    const { isAuthenticated, logout } = useSimpleAuth()
+    const { isAuthenticated } = useSimpleAuth()
 
     const handleProductSearch = (search) => {
         const searchParam = search.current.value;
