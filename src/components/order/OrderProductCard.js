@@ -40,7 +40,9 @@ const OrderProductCard = props => {
                 <h4>{product.title}</h4>
                 <p>${parseInt(product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}/unit</p>
                 <p>Category: <Link to={categoryLink}>{productType.name}</Link></p>
+                <div className= "delete-product-container">
                 <button className="delete-product-order" onClick = {()=>handleDelete(product.id)} disabled={isLoading}>Delete</button>
+                </div>
             </div>
         </div>
     )
