@@ -83,9 +83,15 @@ const OrderDetails = (props) => {
             <div className="delete-order-container">
             {hasOrder && hasCart? <button className="delete-order" onClick = {()=>handleDelete(order[0].id)} disabled={isLoading}>Cancel Order</button>:<p></p>}
             </div>
-            <FormModal buttonLabel={"Complete Order"}>
-                <PayTypeRadios handleCompleteOrder={handleCompleteOrder} />
-            </FormModal>
+            {
+                cart.length === 0 
+                ? ('') 
+                : (
+                    <FormModal buttonLabel={"Complete Order"}>
+                        <PayTypeRadios handleCompleteOrder={handleCompleteOrder} />
+                    </FormModal>
+                ) 
+            }
         </div>
     )
 }
