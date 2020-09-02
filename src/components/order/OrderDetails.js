@@ -21,9 +21,10 @@ const OrderDetails = (props) => {
             setIsLoading(false)
         })
         .catch((err) => console.error('There was an issue with getting all products:', err));
-        dataManager.getAll('orders')
+        shoppingCart.currentOrder()
         .then((order) => {
             setOrder(order);
+            console.log(order);
         })
         .catch((err) => console.error('There was an issue with getting an order:', err));
     },[toggle]);
