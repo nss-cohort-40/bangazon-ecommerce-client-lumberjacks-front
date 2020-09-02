@@ -9,7 +9,7 @@ const FormModal = ({buttonLabel, className, children}) => {
 
   return (
     <>
-      <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
+      <Button color="dark" onClick={toggle}>{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className} centered={true} backdrop={true}>
         <ModalHeader toggle={toggle}>Select Payment Type:</ModalHeader>
         <ModalBody>

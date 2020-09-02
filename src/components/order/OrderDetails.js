@@ -4,9 +4,11 @@ import shoppingCart from '../../hooks /shoppingCart'
 
 import FormModal from '../modal/FormModal';
 import PayTypeRadios from '../account/PayTypeRadios';
+import dataManager from '../../modules/dataManager';
 
 const OrderDetails = (props) => {
     const [cart, setCart] = useState([]);
+    const [order, setOrder] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [toggle, setToggle] = useState(false)
 
@@ -17,14 +19,30 @@ const OrderDetails = (props) => {
         .then((cart) => {
             setCart(cart)
             setIsLoading(false)
-        })   
+        }).then(() => {
+            dataManager.getAll('orders').then((order) => {
+                setOrder(order);
+                console.log('Right when component mounts:', order);
+            })
+        })
         .catch((err) => console.error('There as an issue with getting all products:', err));
         
         
     },[toggle]);
 
     const handleCompleteOrder = (payTypeId) => {
-        console.log(`Order being paid with payment: ${payTypeId}`);
+        const stateOrder = order;
+        const newOrder = {
+            id: stateOrder.id,
+            created_at: null,
+            customer_id: stateOrder.customer_id,
+            payment_type_id: payTypeId
+        }
+        console.log('Updated order:', newOrder);
+        dataManager.update('orders', newOrder).then((res) => {
+            console.log(res);
+            props.history.push('/');
+        })
     }
 
 

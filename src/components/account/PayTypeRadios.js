@@ -20,18 +20,20 @@ const PayTypeRadios = ({handleCompleteOrder}) => {
     }
 
     return (
-        <div className="PayTypeRadios">
+        <div className="PayTypeRadios mx-auto">
             {
                 statePaymentTypes.map((singlePayType) => (
                     <div key={singlePayType.id} className="form-check">
                         <input className="form-check-input" type="radio" name="payTypeRadios" id={singlePayType.id} value={singlePayType.id} checked={selectedPayTypeId === singlePayType.id} onChange={payTypeSelectionChange} />
                         <label className="form-check-label" htmlFor={singlePayType.id}>
-                            {singlePayType.merchant_name}
+                            <p>{singlePayType.merchant_name}</p>
+                            <p>{singlePayType.account_number}</p> 
+                            <p>Expiration Date: {singlePayType.expiration_date}</p>
                         </label>
                     </div>
                 ))
             }
-            <button type="button" onClick={() => handleCompleteOrder(selectedPayTypeId)}>Done</button>
+            <button className="btn btn-dark m-3" type="button" onClick={() => handleCompleteOrder(selectedPayTypeId)}>Done</button>
         </div>
     )
 }
