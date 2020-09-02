@@ -62,7 +62,7 @@ export default {
                 "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
             },
             body: JSON.stringify(editedObject)
-        }).then(response => response.json())
+        })
     },
 
     getByProperty (collection, key, value) {

@@ -38,7 +38,7 @@ const ApplicationViews = props => {
                 }}
             />
             <Route
-                exact path="/orders/confirmation" render={props => {
+                exact path="/orders/confirmation/:orderId" render={props => {
                     return <OrderConfirmation {...props} />
                 }}
             />

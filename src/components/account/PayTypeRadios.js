@@ -9,7 +9,7 @@ const PayTypeRadios = ({handleCompleteOrder}) => {
             return dataManager.getAll('paymenttypes')
               .then((paymentTypes) => {
                   setStatePaymentTypes(paymentTypes);
-              }).then(console.log(statePaymentTypes))
+              })
               .catch((err) => console.error('There was an error getting the payment types for this user:', err));
         }
         getPaymentTypes();

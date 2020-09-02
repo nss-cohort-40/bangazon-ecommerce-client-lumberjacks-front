@@ -24,7 +24,6 @@ const OrderDetails = (props) => {
         dataManager.getAll('orders')
         .then((order) => {
             setOrder(order);
-            console.log('Right when component mounts:', order);
         })
         .catch((err) => console.error('There was an issue with getting an order:', err));
     },[toggle]);
@@ -36,11 +35,10 @@ const OrderDetails = (props) => {
             customer_id: order[0].customer_id,
             payment_type_id: payTypeId
         }
-        console.log('Updated order:', newOrder);
-        dataManager.update('orders', newOrder).then((res) => {
-            console.log(res);
-            props.history.push('/orders/confirmation');
+        dataManager.update('orders', newOrder).then(() => {
+            props.history.push(`/orders/confirmation/${newOrder.id}`);
         })
+        .catch((err) => console.error('There was an issue updating this order:', err));
     }
 
 
