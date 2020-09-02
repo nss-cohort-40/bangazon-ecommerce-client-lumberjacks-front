@@ -21,18 +21,9 @@ const ApplicationViews = props => {
 
     const { isAuthenticated, logout } = useSimpleAuth()
 
-    const handleProductSearch = (search) => {
-        const searchParam = search.current.value;
-        dataManager.getByProperty('products', 'title', searchParam)
-          .then((response) => {
-              console.log(response);
-          })
-          .catch((err) => console.error('There was an issue with searching for a product:', err));
-    }
-
     return (
         <React.Fragment>
-            <NavBar handleProductSearch={handleProductSearch} {...props} />
+            <NavBar {...props} />
             <Route
                 exact path="/" render={props => {
                     return <ProductList {...props} />
