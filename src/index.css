@@ -55,14 +55,14 @@ code {
   justify-content: space-evenly;
   margin-top: 10px;
 }
-<<<<<<< HEAD
 
 .OrderDetail {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-=======
+  align-items: center
+}
+
 .delete-product-container{
   display: flex;
   justify-content: center;  
@@ -86,5 +86,4 @@ code {
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: rgb(202, 60, 60);
->>>>>>> master
 }
