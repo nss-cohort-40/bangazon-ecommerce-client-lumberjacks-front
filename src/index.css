@@ -55,3 +55,10 @@ code {
   justify-content: space-evenly;
   margin-top: 10px;
 }
+
+.OrderDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

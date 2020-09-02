@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import OrderProductCard from '../order/OrderProductCard'
 import shoppingCart from '../../hooks /shoppingCart'
 
+import FormModal from '../modal/FormModal';
+import PayTypeRadios from '../account/PayTypeRadios';
+
 const OrderDetails = (props) => {
     const [cart, setCart] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
@@ -20,6 +23,10 @@ const OrderDetails = (props) => {
         
     },[toggle]);
 
+    const handleCompleteOrder = (payTypeId) => {
+        console.log(`Order being paid with payment: ${payTypeId}`);
+    }
+
 
     return(
         <div className="OrderDetail">
@@ -27,6 +34,9 @@ const OrderDetails = (props) => {
             <div className="product-container">
             {cart.map((singleProduct, i) => <OrderProductCard setToggle={setToggle} toggle={toggle} key={i+1} product={singleProduct}/>)}
             </div>
+            <FormModal buttonLabel={"Complete Order"}>
+                <PayTypeRadios handleCompleteOrder={handleCompleteOrder} />
+            </FormModal>
         </div>
     )
 }
