@@ -11,6 +11,7 @@ import Profile from "./account/Profile"
 import ProductList from './product/ProductList'
 import PayTypeForm from './account/PayTypeForm'
 import NavBar from './nav/NavBar'
+import OrderConfirmation from './order/OrderConfirmation';
 import dataManager from '../modules/dataManager';
 import useSimpleAuth from "../hooks / ui/useSimpleAuth"
 import MyProducts from "./product/MyProducts"
@@ -20,21 +21,17 @@ const ApplicationViews = props => {
 
     const { isAuthenticated, logout } = useSimpleAuth()
 
-    const handleProductSearch = (search) => {
-        const searchParam = search.current.value;
-        dataManager.getByProperty('products', 'title', searchParam)
-          .then((response) => {
-              console.log(response);
-          })
-          .catch((err) => console.error('There was an issue with searching for a product:', err));
-    }
-
     return (
         <React.Fragment>
-            <NavBar handleProductSearch={handleProductSearch} {...props} />
+            <NavBar {...props} />
             <Route
                 exact path="/" render={props => {
                     return <ProductList {...props} />
+                }}
+            />
+            <Route
+                exact path="/orders/confirmation/:orderId" render={props => {
+                    return <OrderConfirmation {...props} />
                 }}
             />
 

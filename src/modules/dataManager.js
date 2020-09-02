@@ -3,7 +3,14 @@ const remoteURL = 'http://localhost:8000'
 export default {
 
     getAll (collection) {
-        return fetch(`${remoteURL}/${collection}`)
+        return fetch(`${remoteURL}/${collection}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+            }
+        })
                 .then(response => response.json())
     },
 
@@ -55,7 +62,7 @@ export default {
                 "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
             },
             body: JSON.stringify(editedObject)
-        }).then(response => response.json())
+        })
     },
 
     getByProperty (collection, key, value) {

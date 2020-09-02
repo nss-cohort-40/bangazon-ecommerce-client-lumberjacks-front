@@ -3,6 +3,9 @@ import OrderProductCard from '../order/OrderProductCard'
 import shoppingCart from '../../hooks /shoppingCart'
 import dataManager from '../../modules/dataManager'
 
+import FormModal from '../modal/FormModal';
+import PayTypeRadios from '../account/PayTypeRadios';
+
 const OrderDetails = (props) => {
     const [cart, setCart] = useState([]);
     const [order, setOrder] = useState([])
@@ -42,10 +45,29 @@ const OrderDetails = (props) => {
             setCart(cart)
             setHasCart(true)
             setIsLoading(false)
-            } 
-    })   
-        .catch((err) => console.error('There as an issue with getting all products:', err));  
+        }
+    })
+        .catch((err) => console.error('There was an issue with getting all products:', err));
+        shoppingCart.currentOrder()
+        .then((order) => {
+            setOrder(order);
+            console.log(order);
+        })
+        .catch((err) => console.error('There was an issue with getting an order:', err));
     },[toggle]);
+
+    const handleCompleteOrder = (payTypeId) => {
+        const newOrder = {
+            id: order[0].id,
+            created_at: null,
+            customer_id: order[0].customer_id,
+            payment_type_id: payTypeId
+        }
+        dataManager.update('orders', newOrder).then(() => {
+            props.history.push(`/orders/confirmation/${newOrder.id}`);
+        })
+          .catch((err) => console.error('There as an issue with getting all products:', err)); 
+    }
 
     useEffect(() => {
         getOrder()
@@ -61,6 +83,15 @@ const OrderDetails = (props) => {
             <div className="delete-order-container">
             {hasOrder && hasCart? <button className="delete-order" onClick = {()=>handleDelete(order[0].id)} disabled={isLoading}>Cancel Order</button>:<p></p>}
             </div>
+            {
+                cart.length === 0 
+                ? ('') 
+                : (
+                    <FormModal buttonLabel={"Complete Order"}>
+                        <PayTypeRadios handleCompleteOrder={handleCompleteOrder} />
+                    </FormModal>
+                ) 
+            }
         </div>
     )
 }
