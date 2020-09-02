@@ -5,6 +5,10 @@ const EditProfileForm = props => {
 
     const [currentUser, setCurrentUser] = useState({ "id": 0, "firstName": "", "lastName": "", "email": "", "address": "", "phoneNumber": 0})
 
+    const toggleToggle = () => {
+        props.toggle ? props.setToggle(false) : props.setToggle(true)
+    }
+
     const getCurrentUser = () => {
         return fetch('http://localhost:8000/customers', {
             "method": "GET",
@@ -42,7 +46,7 @@ const EditProfileForm = props => {
 
         dataManager.update('customers', editedUser)
         .then(() => {
-            props.setToggleUseEffect(!props.toggleUseEffect)
+            toggleToggle()
             props.toggleEditProfileForm()
         })
 

@@ -7,7 +7,7 @@ const Profile = props => {
     const [currentUser, setCurrentUser] = useState({})
     const [paymentTypes, setPaymentTypes] = useState([])
     const [showEditProfileForm, setShowEditProfileForm] = useState(false)
-    const [toggleUseEffect, setToggleUseEffect] = useState(false)
+    const [toggle, setToggle] = useState(false)
 
     const getCurrentUser = () => {
         return fetch('http://localhost:8000/customers', {
@@ -49,11 +49,11 @@ const Profile = props => {
 
     useEffect(() => {
         getCurrentUser();
-    }, [toggleUseEffect])
+    }, [toggle])
 
     useEffect(() => {
         getPaymentTypes();
-    }, [toggleUseEffect])
+    }, [toggle])
 
     return (
         <section>
@@ -80,8 +80,8 @@ const Profile = props => {
                 ? createPortal(<EditProfileForm 
                                 getCurrentUser={getCurrentUser} 
                                 toggleEditProfileForm={toggleEditProfileForm}
-                                toggleUseEffect={toggleUseEffect}
-                                setToggleUseEffect={setToggleUseEffect}
+                                toggle={toggle}
+                                setToggle={setToggle}
                                 />, modalDiv)
                 : null
             }
