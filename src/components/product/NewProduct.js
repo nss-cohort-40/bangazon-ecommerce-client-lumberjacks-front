@@ -21,12 +21,25 @@ const NewProduct = props => {
         setSelectedProductTypeId(parseInt(productTypeId))
     }
 
+    const checkSpecialCharacters = e => {
+        let hasSpecialCharacters = RegExp("[!@#$%^&*()]+", "g").test(e.target.value)
+        if (e.target.name === 'title') {
+            setTitle(e.target.value)
+            setTitleIsGood(hasSpecialCharacters)
+        } else {
+            setDescription(e.target.value)
+            setDescriptionIsGood(hasSpecialCharacters)
+        }
+    }
+
     useEffect(() => {
         getProductTypes()
     }, [])
 
-    const title = useRef()
-    const description = useRef()
+    const [title, setTitle] = useState("")
+    const [titleIsGood, setTitleIsGood] = useState(false)
+    const [description, setDescription] = useState("")
+    const [descriptionIsGood, setDescriptionIsGood] = useState(false)
     const price = useRef()
     const quantity = useRef()
     const location = useRef()
@@ -43,9 +56,9 @@ const NewProduct = props => {
         const currentDate = dateYear + "-" + dateMonth + "-" + dateDay
 
         const newProduct = {
-            "title": title.current.value,
+            "title": title,
             "price": price.current.value,
-            "description": description.current.value,
+            "description": description,
             "quantity": quantity.current.value,
             "location": location.current.value,
             "image": image.current.value,
@@ -69,22 +82,24 @@ const NewProduct = props => {
 
                     <fieldset> 
                         <label htmlFor="title"> Product Title </label>
-                        <input ref={title} type="text"
+                        <input onKeyUp={checkSpecialCharacters} type="text"
                             name="title"
                             maxLength="50"
                             className="form-control"
                             placeholder="Product Title"
                             required autoFocus />
+                        { !titleIsGood ? null : <p>Title can't have special characters</p>}
                     </fieldset>
 
                     <fieldset>
                         <label htmlFor="description"> Product Description </label>
-                        <input ref={description} type="textarea"
+                        <input onKeyUp={checkSpecialCharacters} type="textarea"
                             name="description"
                             maxLength="255"
                             className="form-control"
                             placeholder="Product Description"
                             required/>
+                        { !descriptionIsGood ? null : <p>Description can't have special characters</p>}
                     </fieldset>
 
                     <fieldset>
@@ -137,7 +152,7 @@ const NewProduct = props => {
                     </fieldset>
 
                     <fieldset>
-                        <button type="submit" disabled={selectedProductTypeId === 0}>
+                        <button type="submit" disabled={selectedProductTypeId === 0 || titleIsGood || descriptionIsGood}>
                             Sell Product
                         </button>
                     </fieldset>
