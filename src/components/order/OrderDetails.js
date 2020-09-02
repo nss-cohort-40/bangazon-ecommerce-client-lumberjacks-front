@@ -19,29 +19,27 @@ const OrderDetails = (props) => {
         .then((cart) => {
             setCart(cart)
             setIsLoading(false)
-        }).then(() => {
-            dataManager.getAll('orders').then((order) => {
-                setOrder(order);
-                console.log('Right when component mounts:', order);
-            })
         })
-        .catch((err) => console.error('There as an issue with getting all products:', err));
-        
-        
+        .catch((err) => console.error('There was an issue with getting all products:', err));
+        dataManager.getAll('orders')
+        .then((order) => {
+            setOrder(order);
+            console.log('Right when component mounts:', order);
+        })
+        .catch((err) => console.error('There was an issue with getting an order:', err));
     },[toggle]);
 
     const handleCompleteOrder = (payTypeId) => {
-        const stateOrder = order;
         const newOrder = {
-            id: stateOrder.id,
+            id: order[0].id,
             created_at: null,
-            customer_id: stateOrder.customer_id,
+            customer_id: order[0].customer_id,
             payment_type_id: payTypeId
         }
         console.log('Updated order:', newOrder);
         dataManager.update('orders', newOrder).then((res) => {
             console.log(res);
-            props.history.push('/');
+            props.history.push('/orders/confirmation');
         })
     }
 
