@@ -14,6 +14,7 @@ import NavBar from './nav/NavBar'
 import OrderConfirmation from './order/OrderConfirmation';
 import dataManager from '../modules/dataManager';
 import useSimpleAuth from "../hooks / ui/useSimpleAuth"
+import MyProducts from "./product/MyProducts"
 
 
 const ApplicationViews = props => {
@@ -106,6 +107,14 @@ const ApplicationViews = props => {
                 exact path="/products/cart" render={props => {
                     if (isAuthenticated()) {
                     return <OrderDetails {...props} />
+                } else {
+                    return <Redirect to='login' />
+                }}}
+            />  
+            <Route
+                exact path="/products/myproducts" render={props => {
+                    if (isAuthenticated()) {
+                    return <MyProducts {...props} />
                 } else {
                     return <Redirect to='login' />
                 }}}
