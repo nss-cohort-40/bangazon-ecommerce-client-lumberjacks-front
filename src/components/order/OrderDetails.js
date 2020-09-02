@@ -51,7 +51,6 @@ const OrderDetails = (props) => {
         shoppingCart.currentOrder()
         .then((order) => {
             setOrder(order);
-            console.log(order);
         })
         .catch((err) => console.error('There was an issue with getting an order:', err));
     },[toggle]);
