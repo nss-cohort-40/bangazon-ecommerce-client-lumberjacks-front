@@ -1,30 +1,56 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import dataManager from '../../modules/dataManager';
 
 const EditProfileForm = props => {
 
-    const lastName = useRef()
-    const address = useRef()
-    const phoneNumber = useRef()
+    const [currentUser, setCurrentUser] = useState({ "id": 0, "firstName": "", "lastName": "", "email": "", "address": "", "phoneNumber": 0})
 
-    useEffect(() => {
-        props.getCurrentUser()
-    })
+    const getCurrentUser = () => {
+        return fetch('http://localhost:8000/customers', {
+            "method": "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem('bangazon_token')}`
+            }
+        }).then(response => response.json())
+        .then(user => {
+            const loggedInUser = {
+                "id": user[0].id,
+                "firstName": user[0].user.first_name,
+                "lastName": user[0].user.last_name,
+                "email": user[0].user.email,
+                "address": user[0].address,
+                "phoneNumber": user[0].phone_number
+            }
+            setCurrentUser(loggedInUser)
+        })
+    }
+
+    const handleFieldChange = event => {
+        const stateToChange = {...currentUser}
+        stateToChange[event.target.id] = event.target.value
+        setCurrentUser(stateToChange)
+    }
 
     const handleEditAccount = event => {
         event.preventDefault();
 
-        const editedUser = {...props.currentUser}
-        editedUser["lastname"] = lastName.current.value
-        editedUser["address"] = address.current.value
-        editedUser["phoneNumber"] = phoneNumber.current.value
+        const editedUser = {...currentUser}
+        editedUser["lastname"] = currentUser.lastName
+        editedUser["address"] = currentUser.address
+        editedUser["phoneNumber"] = currentUser.phoneNumber
 
-        dataManager.update('customer', editedUser)
+        dataManager.update('customers', editedUser)
         .then(() => {
-            
+            props.setToggleUseEffect(!props.toggleUseEffect)
+            props.toggleEditProfileForm()
         })
 
     }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
 
     return (
         <article className='modal'>
@@ -34,17 +60,17 @@ const EditProfileForm = props => {
     
                 <div className='form-element'>
                     <label htmlFor='lastName'>Last name: </label>
-                    <input ref={lastName} value={props.currentUser.lastName} type='text' id='lastName'/>
+                    <input value={currentUser.lastName} onChange={handleFieldChange} type='text' id='lastName'/>
                 </div>
 
                 <div className='form-element'>
                     <label htmlFor='address'>Address: </label>
-                    <input ref={address} value={props.currentUser.address} type='text' id='address'/>
+                    <input value={currentUser.address} onChange={handleFieldChange} type='text' id='address'/>
                 </div>
 
                 <div className='form-element'>
                     <label htmlFor='phoneNumber'>Phone number: </label>
-                    <input ref={phoneNumber} value={props.currentUser.phoneNumber} type='tel' id='phoneNumber'/>
+                    <input value={currentUser.phoneNumber} onChange={handleFieldChange} type='tel' id='phoneNumber'/>
                 </div>
     
                 <div className='form-buttons'>
