@@ -77,7 +77,7 @@ const Profile = props => {
 
             {showEditProfileForm
                 ? createPortal(<EditProfileForm 
-                                currentUser={currentUser} 
+                                getCurrentUser={getCurrentUser} 
                                 toggleEditProfileForm={toggleEditProfileForm}
                                 />, modalDiv)
                 : null
