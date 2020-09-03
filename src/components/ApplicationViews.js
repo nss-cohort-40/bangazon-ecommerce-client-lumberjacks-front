@@ -12,7 +12,8 @@ import ProductList from './product/ProductList'
 import PayTypeForm from './account/PayTypeForm'
 import NavBar from './nav/NavBar'
 import OrderConfirmation from './order/OrderConfirmation';
-import dataManager from '../modules/dataManager';
+import OrderHistory from './order/OrderHistory';
+import OrderHistoryDetail from './order/OrderHistoryDetail';
 import useSimpleAuth from "../hooks / ui/useSimpleAuth"
 import MyProducts from "./product/MyProducts"
 
@@ -32,6 +33,16 @@ const ApplicationViews = props => {
             <Route
                 exact path="/orders/confirmation/:orderId" render={props => {
                     return <OrderConfirmation {...props} />
+                }}
+            />
+            <Route
+                exact path="/orders" render={props => {
+                    return <OrderHistory {...props} />
+                }}
+            />
+            <Route
+                exact path="/orders/history/:orderId" render={props => {
+                    return <OrderHistoryDetail {...props} />
                 }}
             />
 

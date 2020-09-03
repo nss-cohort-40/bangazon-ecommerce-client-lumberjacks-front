@@ -56,6 +56,8 @@ const Profile = props => {
         getPaymentTypes();
     }, [toggle])
 
+    const historyQueryPath = `/orders?history=${currentUser.id}`;
+
     return (
         <section>
             <h1>Profile</h1>
@@ -75,7 +77,7 @@ const Profile = props => {
             <h3>Order History:</h3>
 
             <button onClick={() => props.history.push('/add-payment')}>Add payment option</button>
-            <button><Link to="/orders"></Link></button>
+            <Link to={historyQueryPath}><button>View Order History</button></Link>
             <button onClick={toggleEditProfileForm}>Edit account</button>
 
             {showEditProfileForm
