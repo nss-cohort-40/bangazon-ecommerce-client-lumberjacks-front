@@ -5,6 +5,7 @@ import ProductCard from './ProductCard'
 
 const MyProducts = props => {
     const [products, setProducts] = useState([])
+    const [toggle, setToggle] = useState(false)
 
 
     const getProducts = () => {
@@ -23,11 +24,11 @@ const MyProducts = props => {
 
     useEffect(() => {
         getProducts()
-    }, [])
+    }, [toggle])
 
     return (
         <div className='product-container'>
-            {products.map(product => <div  key={product.id}><ProductCard sold={product.location.split("$$$")[1]} product={product} {...props} /> <p>Current Inventory: {product.quantity - product.location.split("$$$")[1]} </p> <p>Number Sold: {product.location.split("$$$")[1]}</p>
+            {products.map(product => <div  key={product.id}><ProductCard toggle = {toggle} setToggle = {setToggle} sold={product.location.split("$$$")[1]} product={product} {...props} /> <p>Current Inventory: {product.quantity - product.location.split("$$$")[1]} </p> <p>Number Sold: {product.location.split("$$$")[1]}</p>
             </div>)}
         </div>
     )

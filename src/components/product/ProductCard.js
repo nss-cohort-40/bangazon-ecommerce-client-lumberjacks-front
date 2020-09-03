@@ -24,6 +24,7 @@ const ProductCard = props => {
         setIsLoading(true)
         dataManager.delete('products', id)
         .then(() => {
+        props.setToggle(!props.toggle)
         setIsLoading(false)})
     }
 
