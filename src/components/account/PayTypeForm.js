@@ -23,13 +23,11 @@ const PayTypeForm = props => {
 
     const getDate = () => {
         let today = new Date()
-        let year = today.getFullYear()
         let month = today.getMonth() + 1
         month = month.toString().length === 1 ? `0${month}` : month
         let day = today.getDate()
         day = day.toString().length === 1 ? `0${day}` : day
-        let datestring = `${today.getFullYear()}-${month}-${day}`
-        setDate(datestring)
+        setDate(`${today.getFullYear()}-${month}-${day}`)
     }
 
     useEffect(() => {
