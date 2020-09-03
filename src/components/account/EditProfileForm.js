@@ -57,7 +57,7 @@ const EditProfileForm = props => {
     }, [])
 
     return (
-        <article className='modal'>
+        <article id='edit-profile-modal'>
             <form className='form-content'>
     
                 <h3 className='form-title'>Edit profile</h3>

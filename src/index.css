@@ -65,7 +65,7 @@ code {
   margin-top: 10px;
 }
 
-.modal {
+#edit-profile-modal {
   background-color: whitesmoke;
   border: black solid 2px;
   position: absolute;
@@ -75,7 +75,7 @@ code {
   bottom: 0;
   margin: auto;
   width: 350px;
-  height: 250px;
+  height: 300px;
   box-shadow: 0 5px 10px 2px rgba(195,192,192,.5);
   text-align: center;
 }
