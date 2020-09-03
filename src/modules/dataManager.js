@@ -13,6 +13,16 @@ export default {
         })
                 .then(response => response.json())
     },
+    getAllProducts (collection) {
+        return fetch(`${remoteURL}/${collection}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+                .then(response => response.json())
+    },
 
     get (collection, id) {
         return fetch(`${remoteURL}/${collection}/${id}`)

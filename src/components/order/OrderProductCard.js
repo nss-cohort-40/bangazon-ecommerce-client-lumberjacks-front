@@ -7,6 +7,7 @@ const OrderProductCard = props => {
     const [productType, setProductType] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const { product } = props;
+    const detailsLink = `/products/${product.id}`
     const categoryLink = `/producttypes/${product.product_type_id}`
     
     const getProductType = () => {
@@ -36,8 +37,8 @@ const OrderProductCard = props => {
     return (
         <div className='product-card'>
             <div className='product-card-content'>
-                <img src={product.image} width={240} alt='thumbnail' />
-                <h4>{product.title}</h4>
+                <img src={product.image} height={200} width={240} alt='thumbnail' />
+                <h4><Link to={detailsLink}>{product.title}</Link></h4>
                 <p>${parseInt(product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}/unit</p>
                 <p>Category: <Link to={categoryLink}>{productType.name}</Link></p>
                 <div className= "delete-product-container">

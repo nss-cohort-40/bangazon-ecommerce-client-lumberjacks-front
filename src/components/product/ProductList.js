@@ -10,7 +10,7 @@ const ProductList = ({ history, location }) => {
     useEffect(() => {
         const getProducts = () => {
             if (location.search) {
-                return dataManager.getAll(`products${location.search}`)
+                return dataManager.getAllProducts(`products${location.search}`)
                   .then((products) => {
                       if (products.length > 0) {
                         setProducts(products);
@@ -21,7 +21,7 @@ const ProductList = ({ history, location }) => {
                   })
                   .catch((err) => console.error('There was an issue with getting products:', err));
             } else {
-                return dataManager.getAll('products')
+                return dataManager.getAllProducts('products')
                 .then((products) => {
                     setProducts(products)
                 })
