@@ -1,10 +1,11 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import payTypeCreation from "../../hooks / ui/payTypeCreation"
 
 const PayTypeForm = props => {
     const merchantName = useRef()
     const accountNumber = useRef()
     const expirationDate = useRef()
+    const [date, setDate] = useState("")
 
     const handleAddPayType = (event) => {
         event.preventDefault()
@@ -19,7 +20,22 @@ const PayTypeForm = props => {
         props.history.push('/profile')
 
     }
-    console.log(new Date())
+
+    const getDate = () => {
+        let today = new Date()
+        let year = today.getFullYear()
+        let month = today.getMonth() + 1
+        month = month.toString().length === 1 ? `0${month}` : month
+        let day = today.getDate()
+        day = day.toString().length === 1 ? `0${day}` : day
+        let datestring = `${today.getFullYear()}-${month}-${day}`
+        setDate(datestring)
+    }
+
+    useEffect(() => {
+        getDate()
+    }, [])
+
     return (
         <article className='form'>
             <form className='form-content' onSubmit={handleAddPayType}>
@@ -38,7 +54,7 @@ const PayTypeForm = props => {
 
                 <fieldset className='form-element'>
                     <label htmlFor='expirationDate'>Expiration date</label>
-                    <input ref={expirationDate} type='date' id='expirationDate' min={new Date()} required />
+                    <input ref={expirationDate} type='date' id='expirationDate' min={date} required />
                 </fieldset>
 
                 <fieldset className='form-button'>
