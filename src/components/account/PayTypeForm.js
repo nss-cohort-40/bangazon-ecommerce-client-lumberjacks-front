@@ -19,7 +19,7 @@ const PayTypeForm = props => {
         props.history.push('/profile')
 
     }
-
+    console.log(new Date())
     return (
         <article className='form'>
             <form className='form-content' onSubmit={handleAddPayType}>
@@ -38,7 +38,7 @@ const PayTypeForm = props => {
 
                 <fieldset className='form-element'>
                     <label htmlFor='expirationDate'>Expiration date</label>
-                    <input ref={expirationDate} type='date' id='expirationDate' required />
+                    <input ref={expirationDate} type='date' id='expirationDate' min={new Date()} required />
                 </fieldset>
 
                 <fieldset className='form-button'>
