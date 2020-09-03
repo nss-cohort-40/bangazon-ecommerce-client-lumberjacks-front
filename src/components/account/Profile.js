@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import {createPortal} from 'react-dom'
 import EditProfileForm from './EditProfileForm'
 import PayTypeCard from './PayTypeCard'
@@ -68,6 +69,8 @@ const Profile = props => {
         getPaymentTypes();
     }, [toggle])
 
+    const historyQueryPath = `/orders?history=${currentUser.id}`;
+
     return (
         <section>
             <h1>Profile</h1>
@@ -92,6 +95,7 @@ const Profile = props => {
             <h3>Order History:</h3>
 
             <button onClick={() => props.history.push('/add-payment')}>Add payment option</button>
+            <Link to={historyQueryPath}><button>View Order History</button></Link>
             <button onClick={toggleEditProfileForm}>Edit account</button>
 
             {showEditProfileForm
