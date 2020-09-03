@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
 
 const Profile = props => {
     
@@ -38,6 +39,7 @@ const Profile = props => {
             <p>Address: {currentUser.address}</p>
             <p>Phone number: {currentUser.phone_number}</p>
             <button onClick={() => props.history.push('/add-payment')}>Add payment option</button>
+            <button><Link to="/orders"></Link></button>
         </section>
     )
 }
