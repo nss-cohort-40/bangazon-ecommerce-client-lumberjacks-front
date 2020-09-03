@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import {createPortal} from 'react-dom'
 import EditProfileForm from './EditProfileForm'
+import PayTypeCard from './PayTypeCard'
 
 const Profile = props => {
     
@@ -48,6 +49,18 @@ const Profile = props => {
 
     const modalDiv = document.getElementById('modal');
 
+    const deletePayType = (id) => {
+        return fetch(`http://localhost:8000/paymenttypes/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("bangazon_token")}`
+            }
+        })
+        .then(props.getPaymentTypes)
+    }
+
     useEffect(() => {
         getCurrentUser();
     }, [toggle])
@@ -70,7 +83,12 @@ const Profile = props => {
             <h3>Payment Types:</h3>
             <ul>
                 {paymentTypes.map(mappedPayType => {
-                    return <li key={mappedPayType.id}>{mappedPayType.merchant_name} {mappedPayType.expiration_date}</li>
+                    return <PayTypeCard 
+                            key={mappedPayType.id}
+                            paymentType={mappedPayType}
+                            toggle={toggle}
+                            setToggle={setToggle}
+                            />
                 })}
             </ul>
 
