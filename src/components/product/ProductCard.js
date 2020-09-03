@@ -35,7 +35,7 @@ const ProductCard = props => {
     return (
         <div className='product-card'>
             <div className='product-card-content'>
-                <img src={product.image} width={240} alt='thumbnail' />
+                <img src={product.image} height={200} width={240} alt='thumbnail' />
                 <h4>
                     <Link to={detailsLink}>
                         {props.product.title}
@@ -44,7 +44,7 @@ const ProductCard = props => {
                 <p>${parseInt(product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}/unit</p>
                 <p>Quantity: {product.quantity}</p>
                 <p>Category: <Link to={categoryLink}>{productType.name}</Link></p>
-                {props.sold==0?<button onClick={()=>handleDelete(props.product.id)} disabled={isLoading}>Delete</button>:null}
+                {props.sold==0?<div className='delete-my-product-container'><button className='delete-my-product' onClick={()=>handleDelete(props.product.id)} disabled={isLoading}>Delete</button></div>:null}
             </div>
         </div>
     )
