@@ -46,15 +46,39 @@ code {
 }
 
 .product-card {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 10px 20px;
+  width: 240px;
 }
-
+.product-cart-content img{
+  width: 240px;
+  height: 240px;
+}
 .product-card-content p {
+  justify-content: center;
   padding: 0 10px;
+  text-align: center;
 }
-
+.my-products{
+  text-align: center;
+}
+.delete-my-product-container{
+  display: flex;
+  flex-direction: row;
+}
+.delete-my-product{
+  flex-basis: 100%;
+  color: white;
+  font-size: 20px;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(202, 60, 60);
+}
 .product-card-content h4 {
   padding: 0 10px;
+  text-align: center;
 }
 
 .product-list {
@@ -111,20 +135,21 @@ fieldset {
 
 .delete-product-container{
   display: flex;
-  justify-content: center;  
+  justify-content: center; 
+  
 }
 .delete-product-order{
-  background-color: aliceblue;
-  font-size: 16px;
+  color: white;
+  font-size: 20px;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-
+  background: rgb(202, 60, 60);
   
 }
 .delete-order-container{
   display: flex;
   flex-direction: row-reverse;
-  padding-right: 20px;
+  /* padding-right: 20px; */
 }
 .delete-order{
   color: white;

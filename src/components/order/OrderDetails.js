@@ -74,14 +74,15 @@ const OrderDetails = (props) => {
 
 
     return(
+        <section>
+        <div className="delete-order-container">
+            {hasOrder && hasCart? <button className="delete-order" onClick = {()=>handleDelete(order[0].id)} disabled={isLoading}>Cancel Order</button>:<p></p>}
+        </div>
         <div className="OrderDetail">
             <h1>Shopping Cart</h1>
             <div className="product-container">
             {hasOrder && hasCart? cart.map((singleProduct, i) => <OrderProductCard setToggle={setToggle} toggle={toggle} key={i+1} product={singleProduct}/>):<p>There's Nothing Here!!</p>}
-            </div>
-            <div className="delete-order-container">
-            {hasOrder && hasCart? <button className="delete-order" onClick = {()=>handleDelete(order[0].id)} disabled={isLoading}>Cancel Order</button>:<p></p>}
-            </div>
+        </div>
             {
                 cart.length === 0 
                 ? ('') 
@@ -91,7 +92,8 @@ const OrderDetails = (props) => {
                     </FormModal>
                 ) 
             }
-        </div>
+        </div>     
+        </section>
     )
 }
 
