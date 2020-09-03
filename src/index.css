@@ -1,10 +1,19 @@
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
 }
 
 code {
@@ -54,6 +63,43 @@ code {
   align-items: center;
   justify-content: space-evenly;
   margin-top: 10px;
+}
+
+#edit-profile-modal {
+  background-color: whitesmoke;
+  border: black solid 2px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 350px;
+  height: 300px;
+  box-shadow: 0 5px 10px 2px rgba(195,192,192,.5);
+  text-align: center;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.form-element {
+  display: inline-block;
+  padding-bottom: 25px;
+}
+
+label {
+  padding-right: 7.5px;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .OrderDetail {
