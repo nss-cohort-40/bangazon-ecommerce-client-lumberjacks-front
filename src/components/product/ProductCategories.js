@@ -17,7 +17,7 @@ const ProductCategories = props => {
               })
               .catch((err) => console.error('There was an issue getting a single product types:', err))
         } else {
-            return dataManager.getAll('producttypes')
+            return dataManager.getAllProducts('producttypes')
             .then(categoryArr => {
                 setCategories(categoryArr)
             })
