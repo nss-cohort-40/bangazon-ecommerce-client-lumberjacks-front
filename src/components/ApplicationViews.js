@@ -19,7 +19,7 @@ import MyProducts from "./product/MyProducts"
 
 const ApplicationViews = props => {
 
-    const { isAuthenticated, logout } = useSimpleAuth()
+    const { isAuthenticated } = useSimpleAuth()
 
     return (
         <React.Fragment>
