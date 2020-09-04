@@ -7,6 +7,9 @@ import ProductTypeDropdown from './ProductTypeDropdown';
 const NewProduct = props => {
     const [productTypes, setProductTypes] = useState([])
     const [selectedProductTypeId, setSelectedProductTypeId] = useState(0)
+    const [image, setImage] = useState('')
+
+    let imageURL = ''
 
     const getProductTypes = () => {
         return dataManager.getAll('producttypes')
@@ -43,7 +46,6 @@ const NewProduct = props => {
     const price = useRef()
     const quantity = useRef()
     const location = useRef()
-    const image = useRef()
 
     const handleNewProduct = e => {
         e.preventDefault()
@@ -61,7 +63,7 @@ const NewProduct = props => {
             "description": description,
             "quantity": quantity.current.value,
             "location": location.current.value,
-            "image": image.current.value,
+            "image": imageURL,
             "created_at": currentDate,
             "product_type_id": selectedProductTypeId
         }
@@ -73,11 +75,28 @@ const NewProduct = props => {
           .catch((err) => console.error('There was an issue with adding a new product:', err));
     }
 
+    const checkUploadResult = (resultEvent) => {
+        if (resultEvent.event === 'success') {
+             imageURL = resultEvent.info.secure_url
+             console.log(imageURL)
+        }
+    }
+
+    let widget = window.cloudinary.createUploadWidget({
+        cloudName: "drofsvn2g",
+        uploadPreset: "wo00wdco" },
+        (error, result) => { 
+            checkUploadResult(result) })
+
+    const showWidget = () => {
+        widget.open()
+    }
+
     return (
         <>
             <main style={{ textAlign: "center" }}>
 
-                <form className="form--login" onSubmit={handleNewProduct} >
+                <div className="form--login" >
                     <h1 className="h3 mb-3 font-weight-normal">What would you like to sell?</h1>
 
                     <fieldset> 
@@ -133,16 +152,6 @@ const NewProduct = props => {
                     </fieldset>
 
                     <fieldset>
-                        <label htmlFor="image"> Link to Image </label>
-                        <input ref={image} type="text"
-                            name="image"
-                            maxLength="255"
-                            className="form-control"
-                            placeholder="Image Link"
-                            required/>
-                    </fieldset>
-
-                    <fieldset>
                         <label htmlFor="category"> Product Category </label>
                         <ProductTypeDropdown 
                             productTypes={productTypes}
@@ -151,13 +160,16 @@ const NewProduct = props => {
                         />
                     </fieldset>
 
+                    <button type="button" onClick={showWidget} required>Upload photo</button>
+
                     <fieldset>
-                        <button type="submit" disabled={selectedProductTypeId === 0 || titleIsGood || descriptionIsGood}>
+                        <button type="button" onClick={handleNewProduct} disabled={selectedProductTypeId === 0 || titleIsGood || descriptionIsGood}>
                             Sell Product
                         </button>
                     </fieldset>
 
-                </form>
+
+                </div>
             </main>
         </>
     )
