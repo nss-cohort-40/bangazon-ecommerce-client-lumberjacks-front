@@ -50,29 +50,34 @@ const NewProduct = props => {
     const handleNewProduct = e => {
         e.preventDefault()
 
-        const submitDate = new Date()
-        let dateYear = submitDate.getFullYear().toString()
-        let dateMonth = submitDate.getMonth().toString()
-        let dateDay = submitDate.getDay().toString()
+        if (quantity.current.value && location.current.value && price.current.value && imageURL != '') {
 
-        const currentDate = dateYear + "-" + dateMonth + "-" + dateDay
+            const submitDate = new Date()
+            let dateYear = submitDate.getFullYear().toString()
+            let dateMonth = submitDate.getMonth().toString()
+            let dateDay = submitDate.getDay().toString()
 
-        const newProduct = {
-            "title": title,
-            "price": price.current.value,
-            "description": description,
-            "quantity": quantity.current.value,
-            "location": location.current.value,
-            "image": imageURL,
-            "created_at": currentDate,
-            "product_type_id": selectedProductTypeId
+            const currentDate = dateYear + "-" + dateMonth + "-" + dateDay
+
+            const newProduct = {
+                "title": title,
+                "price": price.current.value,
+                "description": description,
+                "quantity": quantity.current.value,
+                "location": location.current.value,
+                "image": imageURL,
+                "created_at": currentDate,
+                "product_type_id": selectedProductTypeId
+            }
+
+            productCreation(newProduct)
+            .then((response) => {
+                props.history.push('/')
+            })
+            .catch((err) => console.error('There was an issue with adding a new product:', err));
+        } else {
+            window.alert('Please complete all fields')
         }
-
-        productCreation(newProduct)
-          .then((response) => {
-            props.history.push('/')
-          })
-          .catch((err) => console.error('There was an issue with adding a new product:', err));
     }
 
     const checkUploadResult = (resultEvent) => {
@@ -96,7 +101,7 @@ const NewProduct = props => {
         <>
             <main style={{ textAlign: "center" }}>
 
-                <div className="form--login" >
+                <form className="form--login" >
                     <h1 className="h3 mb-3 font-weight-normal">What would you like to sell?</h1>
 
                     <fieldset> 
@@ -160,7 +165,7 @@ const NewProduct = props => {
                         />
                     </fieldset>
 
-                    <button type="button" onClick={showWidget} required>Upload photo</button>
+                    <button type="button" onClick={showWidget}>Upload photo</button>
 
                     <fieldset>
                         <button type="button" onClick={handleNewProduct} disabled={selectedProductTypeId === 0 || titleIsGood || descriptionIsGood}>
@@ -169,7 +174,7 @@ const NewProduct = props => {
                     </fieldset>
 
 
-                </div>
+                </form>
             </main>
         </>
     )
