@@ -48,4 +48,4 @@ We utilized all skills and concepts learned up to this point in our time here at
 ![Bangazon Database](./public/Bangazon_eCommerce.png)
 
 ## Wireframe
-![Bangazon Wireframe](https://sketchboard.me/rChsmNHwZwtu)
+[Bangazon Wireframe](https://sketchboard.me/rChsmNHwZwtu)
